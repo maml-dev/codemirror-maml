@@ -1,0 +1,46 @@
+@top Document { value }
+
+@skip { space | LineComment }
+
+@detectDelim
+
+value {
+  Object |
+  Array |
+  RawString |
+  String |
+  Number |
+  True |
+  False |
+  Null
+}
+
+Object { "{" (Property ","?)* "}" }
+
+Array { "[" (value ","?)* "]" }
+
+Property { PropertyName ":" value }
+
+PropertyName { Identifier | String }
+
+True { @extend<Identifier, "true"> }
+False { @extend<Identifier, "false"> }
+Null { @extend<Identifier, "null"> }
+
+@tokens {
+  space { $[ \t\n\r]+ }
+
+  LineComment { "#" ![\n\r]* }
+
+  @precedence { RawString, String, Number, Identifier }
+
+  RawString { '"""' (![\"] | '"' ![\"] | '""' ![\"])* '"""' }
+
+  String { '"' (![\"\\\n\r] | "\\" _)* '"' }
+
+  Number { "-"? ("0" | $[1-9] $[0-9]*) ("." $[0-9]+)? ($[eE] $[+\-]? $[0-9]+)? }
+
+  Identifier { $[A-Za-z0-9_\-]+ }
+
+  "{" "}" "[" "]" ":" ","
+}

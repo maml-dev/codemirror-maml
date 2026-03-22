@@ -1,0 +1,40 @@
+{
+  "name": "codemirror-maml",
+  "version": "0.0.1",
+  "description": "MAML language support for CodeMirror 6",
+  "type": "module",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "rollup -c",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@codemirror/language": "^6.10.0",
+    "@lezer/highlight": "^1.2.0",
+    "@lezer/lr": "^1.4.0"
+  },
+  "devDependencies": {
+    "@codemirror/state": "^6.6.0",
+    "@lezer/generator": "^1.7.0",
+    "@rollup/plugin-node-resolve": "^15.0.0",
+    "@rollup/plugin-typescript": "^12.0.0",
+    "rollup": "^4.0.0",
+    "tslib": "^2.8.1",
+    "typescript": "^5.0.0",
+    "vitest": "^3.0.0"
+  },
+  "license": "MIT",
+  "author": "Anton Medvedev <anton@medv.io>"
+}
