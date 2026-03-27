@@ -17,6 +17,7 @@ export const mamlLanguage = LRLanguage.define({
         "PropertyName/Identifier": t.propertyName,
         "PropertyName/String": t.propertyName,
         String: t.string,
+        Escape: t.escape,
         RawString: t.special(t.string),
         Number: t.number,
         "True False": t.bool,

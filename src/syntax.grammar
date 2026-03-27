@@ -15,6 +15,8 @@ value {
   Null
 }
 
+String { '"' (stringContent | Escape)* '"' }
+
 Object { "{" (Property ","?)* "}" }
 
 Array { "[" (value ","?)* "]" }
@@ -27,16 +29,16 @@ True { @extend<Identifier, "true"> }
 False { @extend<Identifier, "false"> }
 Null { @extend<Identifier, "null"> }
 
+@external tokens stringTokenizer from "./tokens" { stringContent, Escape }
+
 @tokens {
   space { $[ \t\n\r]+ }
 
   LineComment { "#" ![\n\r]* }
 
-  @precedence { RawString, String, Number, Identifier }
+  @precedence { RawString, Number, Identifier }
 
   RawString { '"""' (![\"] | '"' ![\"] | '""' ![\"])* '"""' }
-
-  String { '"' (![\"\\\n\r] | "\\" _)* '"' }
 
   Number { "-"? ("0" | $[1-9] $[0-9]*) ("." $[0-9]+)? ($[eE] $[+\-]? $[0-9]+)? }
 

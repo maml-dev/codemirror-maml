@@ -141,6 +141,22 @@ describe("maml parser", () => {
   it("parses string with escape sequences", () => {
     const nodes = topNodes('"hello\\nworld"')
     expect(nodes).toContain("String")
+    expect(nodes).toContain("Escape")
+  })
+
+  it("parses unicode escape sequence", () => {
+    const nodes = topNodes('"\\u{263A}"')
+    expect(nodes).toContain("Escape")
+  })
+
+  it("parses all compact escape sequences", () => {
+    const input = '"\\n\\r\\t\\\\\\"\\/"'
+    const tree = parse(input)
+    let escapeCount = 0
+    tree.cursor().iterate((node) => {
+      if (node.name === "Escape") escapeCount++
+    })
+    expect(escapeCount).toBe(6)
   })
 
   it("parses raw string with quotes inside", () => {
