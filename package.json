@@ -1,6 +1,6 @@
 {
   "name": "codemirror-maml",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "MAML language support for CodeMirror 6",
   "type": "module",
   "main": "dist/index.cjs",
